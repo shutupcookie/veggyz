@@ -1,0 +1,119 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-dm-sans), 'DM Sans', system-ui, sans-serif;
+  --font-display: var(--font-bricolage), 'Bricolage Grotesque', system-ui, sans-serif;
+
+  --color-beet: var(--beet);
+  --color-lime: var(--lime);
+  --color-carrot: var(--carrot);
+  --color-husk: var(--husk);
+  --color-soil: var(--soil);
+  --color-surface: var(--surface);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+:root {
+  color-scheme: light;
+
+  --beet: #5a1236;
+  --lime: #b1ff2d; /* SlapTech electric lime — 10.9:1 on Beet */
+  --carrot: #ff6b2c;
+  --husk: #f6f4ec;
+  --soil: #1a1a17;
+
+  --background: var(--husk);
+  --surface: #ffffff;
+  --foreground: var(--soil);
+  --card: var(--husk);
+  --card-foreground: var(--soil);
+  --popover: var(--husk);
+  --popover-foreground: var(--soil);
+  --primary: var(--beet);
+  --primary-foreground: var(--husk);
+  --secondary: var(--lime);
+  --secondary-foreground: var(--soil);
+  --muted: color-mix(in oklab, var(--soil) 5%, var(--husk));
+  --muted-foreground: color-mix(in oklab, var(--soil) 68%, var(--husk));
+  --accent: var(--carrot);
+  --accent-foreground: var(--soil);
+  --destructive: var(--carrot);
+  --border: color-mix(in oklab, var(--soil) 14%, var(--husk));
+  --input: color-mix(in oklab, var(--soil) 14%, var(--husk));
+  --ring: var(--beet);
+  --radius: 1rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible {
+    outline: 2px solid var(--carrot);
+    outline-offset: 2px;
+  }
+}
+
+/* Long-form copy on guides and about pages */
+.prose-veggyz {
+  @apply text-[1.0625rem] leading-relaxed;
+}
+.prose-veggyz > * + * {
+  margin-top: 1.1em;
+}
+.prose-veggyz h2 {
+  @apply font-display text-2xl font-bold tracking-tight text-beet md:text-3xl;
+  margin-top: 2.2em;
+}
+.prose-veggyz h3 {
+  @apply font-display text-xl font-bold text-beet;
+  margin-top: 1.6em;
+}
+.prose-veggyz a {
+  @apply text-beet underline decoration-beet/30 underline-offset-4 hover:decoration-beet;
+}
+.prose-veggyz ul {
+  @apply list-disc pl-6;
+}
+.prose-veggyz li + li {
+  margin-top: 0.35em;
+}
+.prose-veggyz strong {
+  @apply font-semibold text-beet;
+}

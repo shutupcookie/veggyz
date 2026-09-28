@@ -1,0 +1,23 @@
+# dependencies / build
+node_modules
+.next/
+out/
+.wrangler/
+*.tsbuildinfo
+
+# raw USDA exports live in iCloud → VEGGYZ/Data (15–20 MB each); generated JSON is committed
+data/raw/*.json
+data/raw/*.xlsx
+
+# env
+.env*
+!.env.example
+
+# misc
+.DS_Store
+.vercel/
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+.snowflake/
+.v0-trash/
