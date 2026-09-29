@@ -62,7 +62,7 @@ Workers static assets (free plan: 20,000 files; we ship ~8,200).
 
 ```bash
 npx wrangler login        # once
-pnpm deploy               # build + upload
+pnpm run ship             # build + upload (or `npx wrangler deploy` to upload an existing build)
 ```
 
 Then in the Cloudflare dashboard: Workers & Pages → veggyz → Settings →

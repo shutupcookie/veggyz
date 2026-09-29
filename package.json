@@ -10,7 +10,7 @@
     "build": "next build",
     "postbuild": "node scripts/check-export.mjs",
     "preview": "npx serve out",
-    "deploy": "pnpm build && npx wrangler deploy",
+    "ship": "pnpm build && npx wrangler deploy",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
