@@ -22,7 +22,7 @@ function describe(name: string, st: string, ls: CsaListing[]) {
   const base = n === 1
     ? `${ls[0].name} runs a CSA in ${name}, ${st}.`
     : `${plural(n, 'farm')} around ${name}, ${st} sell CSA shares.`
-  const s = seasons.length ? ` Seasons run ${joinNatural([...new Set(seasons as string[])].slice(0, 2)).toLowerCase()}.` : ''
+  const s = seasons.length ? ` Seasons run ${joinNatural([...new Set(seasons as string[])].slice(0, 2))}.` : ''
   return base + s + ' Share sizes, what goes in the box, and pickup or delivery details for each farm.'
 }
 
