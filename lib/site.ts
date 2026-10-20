@@ -19,6 +19,7 @@ export const site = {
 export const nav = [
   { href: '/farmers-markets/', label: 'Farmers markets' },
   { href: '/csa/', label: 'CSA farms' },
+  { href: '/recipes/', label: 'Recipes' },
   { href: '/best/', label: 'Delivery guides' },
   { href: '/about/', label: 'About' },
 ] as const

@@ -22,16 +22,19 @@ app/                      routes (App Router, all static)
   farmers-markets/        index → [state] → [state]/[city]
   csa/                    index → [state] → [state]/[city] → [state]/[city]/[slug]
   best/                   delivery guides (content/guides.ts)
+  recipes/                index → [collection] → [collection]/[slug]  (content/recipes/)
   brand/                  internal brand guidelines (noindex)
   fonts/                  self-hosted Bricolage Grotesque + DM Sans (OFL)
 components/site/          header, footer, cards, search box, page shell
 components/brand/         the brand-guideline page's own components
 content/guides.ts         guide copy, picks, prices — edit here
 content/affiliates.ts     outbound links; flip `affiliate: true` when approved
+content/recipes/          40 quick vegetarian recipes in 5 collections (types.ts has the model)
 data/raw/                 USDA exports + cities gazetteer (not committed; see below)
 data/generated/           normalised JSON the pages read (committed)
 scripts/build-data.mjs    raw → generated
 scripts/build-og.mjs      renders public/og-default.png
+scripts/build-recipe-cards.mjs  renders public/recipes/cards/*.png (`pnpm cards`; rerun after adding/renaming recipes)
 scripts/check-export.mjs  post-build guard for Cloudflare's asset limits
 lib/                      data access, SEO/JSON-LD helpers, site config
 ```

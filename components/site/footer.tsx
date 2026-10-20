@@ -8,6 +8,7 @@ const cols = [
     links: [
       { href: '/farmers-markets/', label: 'Farmers markets by state' },
       { href: '/csa/', label: 'CSA farms by state' },
+      { href: '/recipes/', label: 'Quick vegetarian recipes' },
       { href: '/best/', label: 'Delivery guides' },
     ],
   },

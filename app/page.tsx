@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from '@/components/site/link'
-import { ArrowRight, Leaf, MapPin, ShoppingBasket } from 'lucide-react'
+import { ArrowRight, CookingPot, Leaf, MapPin, ShoppingBasket } from 'lucide-react'
 import { SearchBox } from '@/components/site/search-box'
 import { Container, SectionTitle } from '@/components/site/page-shell'
 import { CityList } from '@/components/site/directory-nav'
@@ -8,6 +8,8 @@ import { getDirectory, topCities, total } from '@/lib/data'
 import { pageMeta } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { guides } from '@/content/guides'
+import { collections, recipes, toSummary } from '@/content/recipes'
+import { RecipeCard } from '@/components/site/recipe-card'
 
 export const metadata: Metadata = pageMeta({
   title: `${site.name} — farmers markets, CSA farms and plant-based delivery, near you`,
@@ -20,6 +22,7 @@ export default function HomePage() {
   const csas = total('csa')
   const states = getDirectory('farmers-markets').states.length
   const cities = topCities('farmers-markets', 14)
+  const featured = collections.slice(0, 3).map((c) => recipes.find((r) => r.collection === c.slug)!).filter(Boolean)
 
   return (
     <>
@@ -47,6 +50,7 @@ export default function HomePage() {
               {[
                 { icon: MapPin, title: 'Farmers markets', body: 'By state and city, with SNAP/EBT, WIC and payment info.', href: '/farmers-markets/' },
                 { icon: Leaf, title: 'CSA farms', body: 'Weekly veg boxes straight from a farm. Seasons, share sizes, pickup.', href: '/csa/' },
+                { icon: CookingPot, title: 'Quick recipes', body: 'Vegetarian dinners in 30 minutes, each with a twist.', href: '/recipes/' },
                 { icon: ShoppingBasket, title: 'Delivery guides', body: 'Plant-based meal kits and produce boxes, compared honestly.', href: '/best/' },
               ].map((c) => (
                 <li key={c.href}>
@@ -76,6 +80,24 @@ export default function HomePage() {
         <div className="mt-6">
           <Link href="/farmers-markets/" className="inline-flex items-center gap-1.5 font-semibold text-beet underline decoration-beet/30 underline-offset-4 hover:decoration-beet">
             All {states} states <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </div>
+      </Container>
+
+      <Container className="pb-14 md:pb-20">
+        <SectionTitle sub={`${recipes.length} vegetarian dinners, all 30 minutes or less, each with one twist worth stealing.`}>
+          Now cook it
+        </SectionTitle>
+        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {featured.map((r) => (
+            <li key={r.slug}>
+              <RecipeCard r={toSummary(r)} showCollection />
+            </li>
+          ))}
+        </ul>
+        <div className="mt-6">
+          <Link href="/recipes/" className="inline-flex items-center gap-1.5 font-semibold text-beet underline decoration-beet/30 underline-offset-4 hover:decoration-beet">
+            All {recipes.length} recipes <ArrowRight className="size-4" aria-hidden />
           </Link>
         </div>
       </Container>

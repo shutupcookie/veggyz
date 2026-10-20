@@ -149,3 +149,51 @@ export function faqLd(qa: { q: string; a: string }[]): JsonLd {
 export function graph(...nodes: (JsonLd | null | undefined)[]) {
   return { '@context': 'https://schema.org', '@graph': nodes.filter(Boolean) }
 }
+
+export function recipeLd(r: {
+  url: string
+  name: string
+  description: string
+  image: string
+  datePublished: string
+  prepMinutes: number
+  cookMinutes: number
+  servings: number
+  category: string
+  cuisine: string
+  keywords: string[]
+  diets: string[]
+  ingredients: string[]
+  steps: { name: string; text: string; anchor: string }[]
+}): JsonLd {
+  const dietMap: Record<string, string> = {
+    vegan: 'https://schema.org/VeganDiet',
+    'gluten-free': 'https://schema.org/GlutenFreeDiet',
+  }
+  return {
+    '@type': 'Recipe',
+    '@id': `${r.url}#recipe`,
+    name: r.name,
+    description: r.description,
+    image: [r.image],
+    url: r.url,
+    author: { '@type': 'Organization', name: site.name, url: site.url },
+    publisher: { '@id': absolute('/#organization') },
+    datePublished: r.datePublished,
+    prepTime: `PT${r.prepMinutes}M`,
+    cookTime: `PT${r.cookMinutes}M`,
+    totalTime: `PT${r.prepMinutes + r.cookMinutes}M`,
+    recipeYield: `${r.servings} servings`,
+    recipeCategory: r.category,
+    recipeCuisine: r.cuisine,
+    keywords: r.keywords.join(', '),
+    suitableForDiet: ['https://schema.org/VegetarianDiet', ...r.diets.map((d) => dietMap[d]).filter(Boolean)],
+    recipeIngredient: r.ingredients,
+    recipeInstructions: r.steps.map((s) => ({
+      '@type': 'HowToStep',
+      name: s.name,
+      text: s.text,
+      url: `${r.url}#${s.anchor}`,
+    })),
+  }
+}

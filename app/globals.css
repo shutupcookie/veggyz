@@ -117,3 +117,18 @@
 .prose-veggyz strong {
   @apply font-semibold text-beet;
 }
+
+/* Recipe pages print as a clean card: no header, footer or hero chrome */
+@media print {
+  header,
+  footer,
+  nav[aria-label='Breadcrumb'] {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  #recipe {
+    border: 0;
+  }
+}

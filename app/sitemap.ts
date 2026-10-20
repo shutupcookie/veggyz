@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getDirectory } from '@/lib/data'
 import { guides } from '@/content/guides'
+import { collections, recipePath, recipes, recipesUpdated } from '@/content/recipes'
 import { site } from '@/lib/site'
 
 export const dynamic = 'force-static'
@@ -17,6 +18,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/affiliate-disclosure/`, lastModified, changeFrequency: 'yearly', priority: 0.2 },
     { url: `${base}/privacy/`, lastModified, changeFrequency: 'yearly', priority: 0.1 },
   ]
+  const recipesDate = new Date(recipesUpdated)
+  out.push({ url: `${base}/recipes/`, lastModified: recipesDate, changeFrequency: 'weekly', priority: 0.9 })
+  for (const c of collections) out.push({ url: `${base}/recipes/${c.slug}/`, lastModified: recipesDate, changeFrequency: 'weekly', priority: 0.8 })
+  for (const r of recipes) out.push({ url: `${base}${recipePath(r)}`, lastModified: recipesDate, changeFrequency: 'monthly', priority: 0.7 })
   for (const g of guides) out.push({ url: `${base}/best/${g.slug}/`, lastModified: new Date(g.checked), changeFrequency: 'monthly', priority: 0.8 })
   for (const kind of ['farmers-markets', 'csa'] as const) {
     const d = getDirectory(kind)
